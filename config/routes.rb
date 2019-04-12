@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :pessoas
   resources :enderecos
   resources :cidades
   resources :estados
