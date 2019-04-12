@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nome: 
+  documento: MyString
+  telefone: 1
+  email: MyString
+  pai: MyString
+  mae: MyString
+  endereco: one
+
+two:
+  nome: 
+  documento: MyString
+  telefone: 1
+  email: MyString
+  pai: MyString
+  mae: MyString
+  endereco: two
