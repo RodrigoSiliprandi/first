@@ -16,6 +16,7 @@ class DisciplinasTest < ApplicationSystemTestCase
 
     fill_in "Curso", with: @disciplina.curso
     fill_in "Nome", with: @disciplina.nome
+    fill_in "To", with: @disciplina.to
     click_on "Create Disciplina"
 
     assert_text "Disciplina was successfully created"
@@ -28,6 +29,7 @@ class DisciplinasTest < ApplicationSystemTestCase
 
     fill_in "Curso", with: @disciplina.curso
     fill_in "Nome", with: @disciplina.nome
+    fill_in "To", with: @disciplina.to
     click_on "Update Disciplina"
 
     assert_text "Disciplina was successfully updated"
