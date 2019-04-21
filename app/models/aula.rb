@@ -1,2 +1,0 @@
-class Aula < ApplicationRecord
-end
