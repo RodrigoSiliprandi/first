@@ -7,7 +7,6 @@
     <tr>
       <th>Nome</th>
       <th>Curso</th>
-      <th>To</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,7 +16,6 @@
       <tr>
         <td><%= disciplina.nome %></td>
         <td><%= disciplina.curso %></td>
-        <td><%= disciplina.to %></td>
         <td><%= link_to 'Show', disciplina %></td>
         <td><%= link_to 'Edit', edit_disciplina_path(disciplina) %></td>
         <td><%= link_to 'Destroy', disciplina, method: :delete, data: { confirm: 'Are you sure?' } %></td>

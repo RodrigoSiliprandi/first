@@ -2,10 +2,8 @@
 
 one:
   nome: MyString
-  curso: 
-  to: MyString
+  curso: one
 
 two:
   nome: MyString
-  curso: 
-  to: MyString
+  curso: two
