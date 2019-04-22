@@ -1,0 +1,42 @@
+<%= form_with(model: prova, local: true) do |form| %>
+  <% if prova.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(prova.errors.count, "error") %> prohibited this prova from being saved:</h2>
+
+      <ul>
+      <% prova.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :g1 %>
+    <%= form.check_box :g1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :g2 %>
+    <%= form.check_box :g2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subg1 %>
+    <%= form.check_box :subg1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :subg2 %>
+    <%= form.check_box :subg2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :disciplina_id %>
+    <%= form.text_field :disciplina_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

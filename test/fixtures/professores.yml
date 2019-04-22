@@ -3,13 +3,13 @@
 one:
   nome: MyString
   documento: MyString
-  telefone: 1
   email: MyString
+  telefone: 1
   endereco: one
 
 two:
   nome: MyString
   documento: MyString
-  telefone: 1
   email: MyString
+  telefone: 1
   endereco: two

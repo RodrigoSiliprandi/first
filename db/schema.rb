@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_21_223110) do
+ActiveRecord::Schema.define(version: 2019_04_22_012813) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,16 @@ ActiveRecord::Schema.define(version: 2019_04_21_223110) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["endereco_id"], name: "index_alunos_on_endereco_id"
+  end
+
+  create_table "aulas", force: :cascade do |t|
+    t.date "data"
+    t.string "objetivo"
+    t.boolean "realizado"
+    t.bigint "disciplina_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disciplina_id"], name: "index_aulas_on_disciplina_id"
   end
 
   create_table "cidades", force: :cascade do |t|
@@ -44,10 +54,11 @@ ActiveRecord::Schema.define(version: 2019_04_21_223110) do
 
   create_table "disciplinas", force: :cascade do |t|
     t.string "nome"
-    t.bigint "curso_id"
+    t.string "periodo"
+    t.bigint "professor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["curso_id"], name: "index_disciplinas_on_curso_id"
+    t.index ["professor_id"], name: "index_disciplinas_on_professor_id"
   end
 
   create_table "enderecos", force: :cascade do |t|
@@ -68,31 +79,96 @@ ActiveRecord::Schema.define(version: 2019_04_21_223110) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "pessoas", force: :cascade do |t|
-    t.string "nome"
-    t.string "documento"
-    t.integer "telefone"
-    t.string "email"
-    t.string "nomePai"
-    t.string "nomeMae"
+  create_table "leituras", force: :cascade do |t|
+    t.bigint "livro_id"
+    t.boolean "ler"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["livro_id"], name: "index_leituras_on_livro_id"
+  end
+
+  create_table "livros", force: :cascade do |t|
+    t.string "titulo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "professors", force: :cascade do |t|
+  create_table "matriculas", force: :cascade do |t|
+    t.bigint "aluno_id"
+    t.bigint "disciplina_id"
+    t.string "periodo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aluno_id"], name: "index_matriculas_on_aluno_id"
+    t.index ["disciplina_id"], name: "index_matriculas_on_disciplina_id"
+  end
+
+  create_table "notas", force: :cascade do |t|
+    t.bigint "aluno_id"
+    t.bigint "trabalho_id"
+    t.bigint "prova_id"
+    t.bigint "prova_livro_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["aluno_id"], name: "index_notas_on_aluno_id"
+    t.index ["prova_id"], name: "index_notas_on_prova_id"
+    t.index ["prova_livro_id"], name: "index_notas_on_prova_livro_id"
+    t.index ["trabalho_id"], name: "index_notas_on_trabalho_id"
+  end
+
+  create_table "professores", force: :cascade do |t|
     t.string "nome"
     t.string "documento"
-    t.integer "telefone"
     t.string "email"
+    t.bigint "telefone"
     t.bigint "endereco_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["endereco_id"], name: "index_professors_on_endereco_id"
+    t.index ["endereco_id"], name: "index_professores_on_endereco_id"
+  end
+
+  create_table "prova_livros", force: :cascade do |t|
+    t.bigint "livro_id"
+    t.integer "nota"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["livro_id"], name: "index_prova_livros_on_livro_id"
+  end
+
+  create_table "provas", force: :cascade do |t|
+    t.boolean "g1"
+    t.boolean "g2"
+    t.boolean "subg1"
+    t.boolean "subg2"
+    t.bigint "disciplina_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disciplina_id"], name: "index_provas_on_disciplina_id"
+  end
+
+  create_table "trabalhos", force: :cascade do |t|
+    t.date "data_de_entrega"
+    t.string "descricao"
+    t.bigint "disciplina_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["disciplina_id"], name: "index_trabalhos_on_disciplina_id"
   end
 
   add_foreign_key "alunos", "enderecos"
+  add_foreign_key "aulas", "disciplinas"
   add_foreign_key "cidades", "estados"
-  add_foreign_key "disciplinas", "cursos"
+  add_foreign_key "disciplinas", "professores"
   add_foreign_key "enderecos", "cidades"
-  add_foreign_key "professors", "enderecos"
+  add_foreign_key "leituras", "livros"
+  add_foreign_key "matriculas", "alunos"
+  add_foreign_key "matriculas", "disciplinas"
+  add_foreign_key "notas", "alunos"
+  add_foreign_key "notas", "prova_livros"
+  add_foreign_key "notas", "provas"
+  add_foreign_key "notas", "trabalhos"
+  add_foreign_key "professores", "enderecos"
+  add_foreign_key "prova_livros", "livros"
+  add_foreign_key "provas", "disciplinas"
+  add_foreign_key "trabalhos", "disciplinas"
 end

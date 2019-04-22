@@ -14,8 +14,9 @@ class DisciplinasTest < ApplicationSystemTestCase
     visit disciplinas_url
     click_on "New Disciplina"
 
-    fill_in "Curso", with: @disciplina.curso_id
     fill_in "Nome", with: @disciplina.nome
+    fill_in "Periodo", with: @disciplina.periodo
+    fill_in "Professor", with: @disciplina.professor_id
     click_on "Create Disciplina"
 
     assert_text "Disciplina was successfully created"
@@ -26,8 +27,9 @@ class DisciplinasTest < ApplicationSystemTestCase
     visit disciplinas_url
     click_on "Edit", match: :first
 
-    fill_in "Curso", with: @disciplina.curso_id
     fill_in "Nome", with: @disciplina.nome
+    fill_in "Periodo", with: @disciplina.periodo
+    fill_in "Professor", with: @disciplina.professor_id
     click_on "Update Disciplina"
 
     assert_text "Disciplina was successfully updated"

@@ -1,3 +1,3 @@
 class Disciplina < ApplicationRecord
-  belongs_to :curso
+  belongs_to :professor
 end
